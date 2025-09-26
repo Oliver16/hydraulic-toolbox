@@ -1,6 +1,15 @@
 PYTHON=python3
 PIP=python3 -m pip
 
+DOCKER_COMPOSE_DETECT=\
+    if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then \
+        printf '%s' 'docker compose'; \
+    elif command -v docker-compose >/dev/null 2>&1; then \
+        printf '%s' 'docker-compose'; \
+    else \
+        printf '%s' ''; \
+    fi
+
 .PHONY: up down seed test fmt report-demo
 
 up:
