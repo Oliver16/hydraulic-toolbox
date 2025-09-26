@@ -1,0 +1,7 @@
+# units: flow gpm, head ft
+flow,head
+0,60
+400,80
+800,110
+1200,150
+1600,210
