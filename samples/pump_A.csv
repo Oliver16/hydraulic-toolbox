@@ -1,0 +1,7 @@
+# units: flow gpm, head ft, efficiency %, power hp
+flow,head,efficiency,power
+0,155,55,95
+400,148,68,110
+800,134,75,140
+1200,118,73,165
+1600,98,65,180
