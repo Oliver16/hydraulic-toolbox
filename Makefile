@@ -13,20 +13,24 @@ DOCKER_COMPOSE_DETECT=\
 .PHONY: up down seed test fmt report-demo
 
 up:
-	@cmd="$$( $(DOCKER_COMPOSE_DETECT) )"; \
-	if [ -z "$$cmd" ]; then \
+	@if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then \
+		docker compose -f infrastructure/docker-compose.yml up -d --build; \
+	elif command -v docker-compose >/dev/null 2>&1; then \
+		docker-compose -f infrastructure/docker-compose.yml up -d --build; \
+	else \
 	    printf 'Error: Neither "docker compose" nor "docker-compose" is available. Please install Docker Compose.\n' >&2; \
 	    exit 1; \
-	fi; \
-	$$cmd -f infrastructure/docker-compose.yml up -d --build
+	fi
 
 down:
-	@cmd="$$( $(DOCKER_COMPOSE_DETECT) )"; \
-	if [ -z "$$cmd" ]; then \
+	@if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then \
+		docker compose -f infrastructure/docker-compose.yml down; \
+	elif command -v docker-compose >/dev/null 2>&1; then \
+		docker-compose -f infrastructure/docker-compose.yml down; \
+	else \
 	    printf 'Error: Neither "docker compose" nor "docker-compose" is available. Please install Docker Compose.\n' >&2; \
 	    exit 1; \
-	fi; \
-	$$cmd -f infrastructure/docker-compose.yml down
+	fi
 
 seed:
 	$(PYTHON) backend/app/seed.py
