@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+backend/hydraulic_backend.egg-info/
+backend/.env
+frontend/.env.local
+node_modules/
+.env
+frontend/.next/
