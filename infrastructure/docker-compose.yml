@@ -54,6 +54,7 @@ services:
     volumes:
       - app-data:/app/data
 
+
   frontend:
     build:
       context: ../frontend
@@ -68,3 +69,4 @@ services:
 volumes:
   pgdata:
   app-data:
+
