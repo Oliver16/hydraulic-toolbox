@@ -4,10 +4,18 @@ PIP=python3 -m pip
 .PHONY: up down seed test fmt report-demo
 
 up:
-	docker-compose -f infrastructure/docker-compose.yml up -d --build
+	@if docker compose version >/dev/null 2>&1; then \
+		docker compose -f infrastructure/docker-compose.yml up -d --build; \
+	else \
+		docker-compose -f infrastructure/docker-compose.yml up -d --build; \
+	fi
 
 down:
-	docker-compose -f infrastructure/docker-compose.yml down
+	@if docker compose version >/dev/null 2>&1; then \
+		docker compose -f infrastructure/docker-compose.yml down; \
+	else \
+		docker-compose -f infrastructure/docker-compose.yml down; \
+	fi
 
 seed:
 	$(PYTHON) backend/app/seed.py
